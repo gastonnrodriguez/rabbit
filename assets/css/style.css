@@ -456,6 +456,7 @@ section {
 .section-title h2 {
   font-size: 32px;
   font-weight: bold;
+  
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 20px;
@@ -475,6 +476,7 @@ section {
 
 .section-title p {
   margin-bottom: 0;
+  
 }
 
 .section-bg {
@@ -589,6 +591,10 @@ section {
   font-weight: 700;
   font-size: 34px;
   margin-bottom: 30px;
+}
+
+.about .content h3 span{
+  color: var(--rabbit-blue);
 }
 
 .about .content p {
@@ -837,6 +843,30 @@ section {
 /*--------------------------------------------------------------
 # brands
 --------------------------------------------------------------*/
+
+#brands .section-title h2{
+  color: white;
+}
+
+#brands .section-title h2::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--rabbit-lightgrey);
+  bottom: 0;
+  left: calc(50% - 25px);
+}
+
+#brands .section-title p{
+  color: white;
+}
+
+.brands {
+  background: var(--rabbit-blue);
+}
+
 .brands .brands-item {
   margin-bottom: 30px;
 }
@@ -879,14 +909,16 @@ section {
   z-index: 1;
   background: rgb(255, 255, 255);  
   border-radius: 4px;
-  box-shadow: rgba(214, 215, 216, 0.6) 0px 0px 30px;
+  box-shadow: rgba(214, 215, 216, 0.6) 0px 0px 5px;
   display: flex;
   justify-content: center; /* Centrar horizontalmente */
   align-items: center; /* Centrar verticalmente */
-  height: 30vh; 
+  height: 15vh; 
   padding: 25%;
 }
-
+.brands .brands-wrap .dell{
+  padding: 30% !important;
+}
 .brands .brands-wrap::before {
   content: "";
   background: rgba(17, 17, 17, 0.6);
