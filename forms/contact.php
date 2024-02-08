@@ -1,41 +1,65 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+require_once('class.phpmailer.php');
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+//require_once('recaptchalib.php');
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+$mail = new PHPMailer();
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+    
+    if( $_POST['nombre'] != '' AND $_POST['email'] != '' AND $_POST['mensaje'] != '' ) {
+        
+        $privatekey = "6Ld3gd0SAAAAAJaj51saFHEXWapNLG74dKxPSgwS";
+       /* $resp_recaptcha = recaptcha_check_answer ($privatekey,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);*/
+        
+		$name = $_POST['nombre'];
+        
+        $email = $_POST['email'];
+        
+        //$subject = $_POST['asunto'];
+        
+        $message = $_POST['mensaje'];
+        
+        $toemail = 'consultas@rabbit.com.uy'; // Your Email Address
+        
+        $toname = 'Rabbit'; // Your Name
+        
+		$body = "Nombre: ".$name."<br/>Email: ".$email."<br/>Mensaje: ".$message;
+        
+        
+        
+            $mail->SetFrom( $email , $name );
+			$mail->IsHTML(true);
+    
+            $mail->AddReplyTo( $email , $name );
+            
+            $mail->AddAddress( $toemail , $toname );
+            
+            $mail->Subject = "Consulta Web";
+            
+            $mail->MsgHTML( $body );
+            
+            $sendEmail = $mail->Send();
+            
+            if( $sendEmail == true ):
+            
+                echo '<script>alert("Se ha enviado su mensaje correctamente");window.history.back(); </script>';
+            
+            else:
+                
+               echo '<script>alert("Error al enviar su mensaje");window.history.back(); </script>';
+            
+            endif;
+        
+        }
+        
+   
+    
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
 
-  echo $contact->send();
 ?>
+                    
+		
