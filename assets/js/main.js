@@ -291,7 +291,3 @@
   new PureCounter();
 
 })()
-
-const cv = document.getElementById('curriculum');
-cv.style.backgroundColor="#2962a7";
-cv.style.color="white";
